@@ -1,6 +1,6 @@
 # mycode (Pilot)
 
-This is my first repository, one that I have no clue what it will do. Purpose is to practice, learn, fail, and succeed with python. 
+This is my first repository, one that I have no clue what it will do. Purpose is to practice, learn, fail, and succeed with python. I want to learn how to version control projects with git.
 
 ## Getting Started
 
