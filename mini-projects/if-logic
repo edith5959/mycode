@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+"""TLG Learning | edith5959
+    What type of goat are you?"""
+
+# import pyfiglet module
+#from pyfiglet import Figlet
+##result = Figlet(font='banner3-D')
+#print(result.renderText('What breed of goat are you?'))
+
+print('LETS GUESS WHAT BREED OF GOAT YOU ARE BASED ON YOUR COFFEE INTAKE')
+
+print('\nHow many DAYS out of the WEEK do you drink coffee?\n')
+answer= input('Your answer--->')
+
+
+
+   # print('How many DAYS out of the WEEK do you drink coffee?')
+
+if answer == '1' or answer == "one":
+    print('Then you are a Nigerian Dwarf!')
+
+elif answer == '2': 
+    print('Then you are a Boer goat!')
+
+elif answer == '3':
+    print('Then you are an American Pygmy!')
+
+elif answer == '4':
+    print('Then you are a Damascus goat!')
+
+elif answer == '5':
+    print('Then you are an Anglo-Nubian goat!')
+
+elif answer == '6':
+    print('Then you are an Alpine Goat!')
+
+elif answer == '7': 
+    print('Then you are a fainting goat!')
+
+elif answer == "none" or answer == '0':
+    print('Then you are NOT a goat! SORRY!!!')
+
+#while answer not in ["1","2","3","4","5","6","7","one"]:   #sets up an infinite loop condition
+
+else:
+    print("You are the G.O.A.T")
