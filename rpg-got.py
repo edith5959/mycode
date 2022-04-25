@@ -30,6 +30,8 @@ def showStatus():
     #print an item if there is one
     if "item" in rooms[currentRoom]:
       print('You see ' + rooms[currentRoom]['item'])
+    if "item_two" in rooms[currentRoom]:
+      print('You see ' + rooms[currentRoom]['item_two'])
     print("---------------------------")
 
 
@@ -44,11 +46,13 @@ rooms = {
                 'east'  : 'Kings Landing',
                 'north' : 'The Wall',
                 'item'  : 'direwolves',
+                'item_two' : 'figs',
                 },
 
             'Highgarden' : {
                   'north' : 'Winterfell',
                   'item'  : 'golden roses',
+                  'item_two' : 'peaches',
                   },
             'Kings Landing' : {
                   'west' : 'Winterfell',
@@ -65,7 +69,7 @@ rooms = {
                 },
             'The First of the First Men' : {
                 'south': 'The Wall',
-                'item' : 'white walkers',
+                'item' : 'White Walkers',
                 }
             }
 #start thi player in Winterfell
@@ -108,6 +112,15 @@ while True:
             print(move[1] + ' acquired!')
             #delete the item from the room
             del rooms[currentRoom]['item']
+
+        if "item_two" in rooms[currentRoom] and move[1] in rooms[currentRoom]['item_two']:
+            #add the item to their inventory
+            inventory += [move[1]]
+            #display a helpful message
+            print(move[1] + ' acquired')
+            #delete item from the room
+            del rooms[currentRoom]['item']
+
         #otherwise, if the item isn't there to get
         else:
             #tell them they can't get it
