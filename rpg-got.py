@@ -113,13 +113,15 @@ while True:
             #delete the item from the room
             del rooms[currentRoom]['item']
 
-        if "item_two" in rooms[currentRoom] and move[1] in rooms[currentRoom]['item_two']:
+        # two ifs here... I think this is the same as that warmup we had the other day
+
+        elif "item_two" in rooms[currentRoom] and move[1] in rooms[currentRoom]['item_two']:
             #add the item to their inventory
             inventory += [move[1]]
             #display a helpful message
             print(move[1] + ' acquired')
             #delete item from the room
-            del rooms[currentRoom]['item']
+            del rooms[currentRoom]['item_two']
 
         #otherwise, if the item isn't there to get
         else:
