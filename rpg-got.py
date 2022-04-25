@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-"""Driving a simple game framework with
-   a dictionary object | Alta3 Research"""
+"""Edith5959 | Alta3 Research
+    Creating a simple Role Playing Game """
 
 # Replace RPG starter project with this code when new instructions are live
 
