@@ -22,6 +22,11 @@ class Cheat_Swapper(Player):  # inheritance of Player
     def cheat(self):
         self.dice[-1] = 6
 
+class Cheat_extra_die(Player):
+    def cheat(self):
+        self.dice.append(randit(1,6))
+
+
 # allows user to increase all rolls if they were less than a 6
 class Cheat_Loaded_Dice(Player): # inheritance of Player
   def cheat(self):
