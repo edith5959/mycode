@@ -1,6 +1,11 @@
 #!/usr/bin/python3
-"""Edith5959 | Alta3 Research
+"""Edith5959 | Alta3 Research | TLG NDE Cohort
     Creating a simple Role Playing Game """
+
+# Install imports required
+import os   #import os to clear screen
+import sys  #import system.exit function
+
 
 # Replace RPG starter project with this code when new instructions are live
 
@@ -8,8 +13,7 @@ def showInstructions():
     """Show the game instructions when called"""
     #print a main menu and the commands
     print('''
-    RPG Game of finding dragonglass 
-    to defeat the White Walkers
+    
     ===================================
     Find the dragonglass before the 
     White Walkers find you. Be advised-
@@ -40,7 +44,7 @@ inventory = ["slingshot","Valyrian Steel","sunflower seeds"]
 
 #a dictionary linking a room to other rooms
 rooms = {
-
+ 
             'Winterfell' : {
                 'south' : 'Highgarden',
                 'east'  : 'Kings Landing',
