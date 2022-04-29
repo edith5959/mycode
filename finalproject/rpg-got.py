@@ -29,7 +29,7 @@ Use these commands:
   go [direction: south, east, west, or north]
   get [item]
   use [item]
-  talk to [person]
+  talk [person]
 =====================================================================
     ''')
     
@@ -132,7 +132,7 @@ while True:
 
     #if they type 'use' first
     if move[0] == 'use':
-        if move[1] in inventory or rooms[currentRoom]:
+        if move[1] in inventory or ("item_two" in rooms[currentRoom] and move[1] in rooms[currentRoom]["item_two"]):
             if move[1] in ["peaches","figs", "grapes", "sunflower seeds"]:# check if you can eat it
                 print(f"You ate the {move[1]}! How delicious!!")
                 #delete the item from the room
@@ -146,11 +146,9 @@ while True:
     
     #if they type 'talk' first
     if move[0] == 'talk':
-        if "person" in rooms[currentRoom] and move[1].title in rooms[currentRoom]['person']['name']:
+        if "person" in rooms[currentRoom] and move[1].title() in rooms[currentRoom]['person']['name']:
                 print(rooms[currentRoom]['person']['dialogue'])
-                
-    
-
+             
 
     #if they type 'get' first
     if move[0] == 'get' :
