@@ -50,9 +50,9 @@ Use these commands:
 
 
 #an inventory you start with
-inventory = ["slingshot","Valyrian Steel","sunflower seeds"]
+inventory = ["slingshot","sunflower seeds"]
 
-#a dictionary for rooms, movement 
+#The dictionary for rooms, direction, items, people 
 rooms = {
  
             'Winterfell':{
@@ -70,22 +70,25 @@ rooms = {
             'Highgarden' : {
                   'desc'  : 'HIGHGARDEN, the seat of House Tyrell, the regional capital of the \n Reach, and the heart of chivalry in the Seven Kingdoms.\n It lies on the Mander where the ocean road meets the rose road.',
                   'north' : 'Winterfell',
+                  'west'  : 'Casterly Rock',
                   'item_two' : 'peaches',
+                  'person': {'name': 'Olenna Tyrell',
+                      'dialogue': 'Olenna: "I\'ve known a great number of clever men. \n I\'ve outlived them all. You know how? I ignored them."'},
                   },
             'Kings Landing' : {
                   'desc' : 'KINGS LANDING, named after King Baelor Targaryen, is the site of \n the Iron Throne and the Red Keep. \n It is here Daenerys releases her fury.',
                   'west' : 'Winterfell',
                   'person': {'name': 'Robert Baratheon',
-                      'dialogue': '"Robert: I swear to you, I was never so alive as when I was winning this throne,\n or so dead as now that I\'ve won it.'
+                      'dialogue': 'Robert: "I swear to you, I was never so alive as when I was \n  winning this throne, or so dead as now that I\'ve won it."'
                              },
-                  'item' : 'iron throne',
+                  'item_two' : 'almonds',
 
                   },
             'Casterly Rock' : {
-                'desc'  : 'CASTERLY ROCK, the seat of House Lannister and the capital of the \n westerlands. It is here that the Unsullied army of House Targaryen with \n the assistance of Tyrion that victory is proclaimed.', 
+                'desc'  : 'You\'re in CASTERLY ROCK, the seat of House Lannister and the capital \n of the westerlands. It is here that the Unsullied army of \n House Targaryen with the assistance of Tyrion that victory is proclaimed.', 
                 'east'  : 'Winterfell',
                 'person': {'name':'Tyrion',
-                            'dialogue':'We’ve had vicious kings and we’ve had idiot kings,\n but I don’t know if we’ve ever been cursed with a vicious idiot boy king!'},
+                    'dialogue':'Tyrion: "We’ve had vicious kings and we’ve had idiot kings,\n but I don’t know if we’ve ever been cursed with a \n vicious idiot boy king!'},
                 'item_two'  : 'grapes',
                 },
             'The Wall' : {
@@ -97,23 +100,23 @@ rooms = {
             'The First of the First Men' : {
                 'south': 'The Wall',
                 'item' : 'White Walkers',
+                'item_two': 'sunflower seeds',
                 }
             }
 #start this player in Winterfell
 currentRoom = 'Winterfell'
 
+#clear the screen before instructions/commands
 os.system("clear")
 
 showInstructions()
 
-#Game loop
+#############################Game Loop#################################
 
 while True:
     showStatus()
 
     #get the player's next 'move'
-    #.split() breaks it up into an list array
-    #eg typing 'go east' would give the list:
     move = ''
     while move == '':  
         move = input('>')
@@ -132,27 +135,45 @@ while True:
         else:
             print('You can\'t go that way!')
 
+
+
     #if they type 'use' first
     if move[0] == 'use':
         if move[1] in inventory or ("item_two" in rooms[currentRoom] and move[1] in rooms[currentRoom]["item_two"]):
-            if move[1] in ["peaches","figs", "grapes", "sunflower seeds"]:
+            if move[1] in ["peaches", "almonds", "figs", "grapes", "sunflower seeds"]:
                 print(f"\nYou ate the {move[1]}! How delicious!!")
                 #delete the item from the room
+                #inventory.remove(move[1])
                 del rooms[currentRoom]['item_two']
             else: # if it's not in your inventory
                 print(f"You don't have {move[1]}!")
+        elif move[1] in inventory:
+            #remove item from inventory
+            inventory.remove(move[1])
+            print(f"{move[1]} + have been eaten!")
+
         elif move[1] in inventory or ("item" in rooms[currentRoom] and move[1] in rooms[currentRoom]["item"]):
             if move[1] in ["direwolves"]:
-                print(f"You are now walking with the direwolves!!")
+                print(f"You trained the direwolves to protect and walk alongside you!!")
                 del rooms[currentRoom]['item']
             else: 
                 print(f"You don't have {move[1]}!")
-    
+        else: 
+            print(f"You can't use {move[1]}!")
+
+
+
     #if they type 'talk' first
     if move[0] == 'talk':
+        #if the room contains person and they want to talk to them
         if "person" in rooms[currentRoom] and move[1].title() in rooms[currentRoom]['person']['name']:
                 print(rooms[currentRoom]['person']['dialogue'])
-                
+        #otherwise, if the person is not there to talk to:
+        else:
+            #tell them they can't talk to them
+            print('Can\'t talk ' + move[1] + '!')
+
+
     #if they type 'get' first
     if move[0] == 'get' :
         #if the room contains an item, and the item is the one they want to get
@@ -163,7 +184,6 @@ while True:
             print(move[1] + ' acquired!')
             #delete the item from the room
             del rooms[currentRoom]['item']
-
         elif "item_two" in rooms[currentRoom] and move[1] in rooms[currentRoom]['item_two']:
             #add the item to their inventory
             inventory += [move[1]]
@@ -171,7 +191,6 @@ while True:
             print(move[1] + ' acquired!')
             #delete item from the room
             del rooms[currentRoom]['item_two']
-
         #otherwise, if the item isn't there to get
         else:
             #tell them they can't get it
